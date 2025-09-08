@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-set(PROJECT_NAME libretro)
+set(PROJECT_NAME appretro)
 set(PROJECT_DESCRIPTION "Modern C++ minimalist cross-platform 2D game engine")
 set(PROJECT_VERSION "1.0.0")
 set(CMAKE_CXX_STANDARD 23)
