@@ -1,2 +1,2 @@
 # appretro
-Modern C++ minimalist 2D game engine
+Modern C++ minimalist cross-platform 2D game engine
