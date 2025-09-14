@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.21)
+cmake_policy(SET CMP0167 NEW)
 
 set(PROJECT_NAME appretro)
 set(PROJECT_DESCRIPTION "Modern C++ minimalist cross-platform 2D game engine")
 set(PROJECT_VERSION "1.0.0")
+set(TILED_MAP_EDITOR_VERSION "1.11.2")
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -15,3 +17,5 @@ project(${PROJECT_NAME}
 	DESCRIPTION ${PROJECT_DESCRIPTION}
 	VERSION ${PROJECT_VERSION}
 )
+
+add_subdirectory(src/${PROJECT_NAME})

@@ -1,1 +1,7 @@
-{}
+{
+  "dependencies": [
+    "boost-json",
+    "boost-log",
+    "boost-program-options"
+  ]
+}
