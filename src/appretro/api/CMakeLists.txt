@@ -1,3 +1,5 @@
+find_package(boost_property_tree CONFIG REQUIRED)
+
 set(INCROOT "${PROJECT_SOURCE_DIR}/include/appretro/api")
 set(SRCROOT "${PROJECT_SOURCE_DIR}/src/appretro/api")
 
@@ -21,6 +23,11 @@ target_include_directories(${PROJECT_NAME}-api
 	PUBLIC 
 		$<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>
+)
+
+target_link_libraries(${PROJECT_NAME}-api 
+	PRIVATE 
+		Boost::property_tree
 )
 
 target_compile_options(${PROJECT_NAME}-api

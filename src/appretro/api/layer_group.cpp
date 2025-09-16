@@ -38,24 +38,19 @@
  */
 
 #include "pch.h"
+#include "detail.h"
 
 namespace retro::app::api
 {
 
-	void layer_group::on_create()
+	layer_group::layer_group(std::weak_ptr<map> map) noexcept
+		: layer(map)
 	{
-		for (auto& layer : m_layers)
-		{
-			layer->on_create();
-		}
 	}
 
-	void layer_group::on_destroy()
+	void layer_group::on_create(const detail::property_tree&)
 	{
-		for (auto& layer : m_layers)
-		{
-			layer->on_destroy();
-		}
+		
 	}
 
 }

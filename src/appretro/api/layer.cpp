@@ -42,8 +42,17 @@
 namespace retro::app::api
 {
 
-	layer::layer() noexcept
+	layer::layer(map_ptr map) noexcept
 		: m_id(INVALID_ID)
+		, m_map(map)
+		, m_parent()
+	{
+	}
+
+	layer::layer(layer_group_ptr layer_group) noexcept
+		: m_id(INVALID_ID)
+		, m_map()
+		, m_parent(layer_group)
 	{
 	}
 	

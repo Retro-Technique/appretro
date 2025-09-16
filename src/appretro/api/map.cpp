@@ -38,29 +38,64 @@
  */
 
 #include "pch.h"
+#include "detail.h"
 
 namespace retro::app::api
 {
 
-	map::project_ptr map::project() const noexcept
+	map::map(project_sptr project) noexcept
+		: m_project(project)
 	{
-		return m_project;
 	}
 
-	void map::on_create()
+	void map::on_create(const detail::property_tree& pt)
 	{
-		for (auto& layer : m_layers)
-		{
-			layer->on_create();
-		}
-	}
+		m_width = pt.get().get<std::int32_t>("<xmlattr>.width", 0);
+		m_height = pt.get().get<std::int32_t>("<xmlattr>.height", 0);
+		m_tile_width = pt.get().get<std::int32_t>("<xmlattr>.tilewidth", 0);
+		m_tile_height = pt.get().get<std::int32_t>("<xmlattr>.tileheight", 0);
 
-	void map::on_destroy()
-	{
-		for (auto& layer : m_layers)
+		for (const auto& [tag, child] : pt.get())
 		{
-			layer->on_destroy();
+			if (tag == "group")
+			{
+				auto group = std::make_shared<layer_group>(shared_from_this());
+				group->on_create(detail::property_tree(child));
+				m_layers.push_back(group);
+			}
 		}
+
+		/*
+
+		for (const auto& [tag, child] : pt)
+		{
+			if (tag == "layer")
+			{
+				auto tile_layer = std::make_shared<tile_layer>(shared_from_this());
+				tile_layer->on_create(child);
+				m_layers.push_back(tile_layer);
+			}
+			else if (tag == "objectgroup")
+			{
+				auto object_group = std::make_shared<object_group>(shared_from_this());
+				object_group->on_create(child);
+				m_layers.push_back(object_group);
+			}
+			else if (tag == "imagelayer")
+			{
+				auto image_layer = std::make_shared<image_layer>(shared_from_this());
+				image_layer->on_create(child);
+				m_layers.push_back(image_layer);
+			}
+			else if (tag == "group")
+			{
+				auto layer_group = std::make_shared<layer_group>(shared_from_this());
+				layer_group->on_create(child);
+				m_layers.push_back(layer_group);
+			}
+		}
+		
+		*/
 	}
 
 }

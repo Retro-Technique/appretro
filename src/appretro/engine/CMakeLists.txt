@@ -1,7 +1,6 @@
 find_package(boost_log CONFIG REQUIRED)
 find_package(boost_log_setup CONFIG REQUIRED)
 find_package(Boost REQUIRED COMPONENTS program_options)
-find_package(Boost REQUIRED COMPONENTS json)
 
 set(SRCROOT "${PROJECT_SOURCE_DIR}/src/appretro/engine")
 
@@ -29,7 +28,6 @@ target_link_libraries(${PROJECT_NAME}
 		Boost::log
 		Boost::log_setup
 		Boost::program_options
-		Boost::json
 		${PROJECT_NAME}-api
 )
 

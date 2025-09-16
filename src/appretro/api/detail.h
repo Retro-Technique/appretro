@@ -39,34 +39,25 @@
 
 #pragma once
 
-#ifndef __APPRETRO_API_H_INCLUDED__
-#error "Do not include this file directly, include <appretro/api.h> instead."
-#endif
-
-namespace retro::app::api
+namespace retro::app::api::detail
 {
-
-	class APPRETRO_API_API object_group : public layer
+	class property_tree
 	{
 	public:
 
-		using object_ptr = std::shared_ptr<object>;
-		using objects = std::vector<object_ptr>;
+		explicit property_tree(const boost::property_tree::ptree& pt)
+			: m_pt(&pt)
+		{
+		}
 
-		object_group() noexcept = default;
-		~object_group() = default;
-		object_group(const object_group&) = delete;
-		object_group& operator=(const object_group&) = delete;
-		object_group(object_group&&) noexcept = default;
-		object_group& operator=(object_group&&) noexcept = default;
+		const boost::property_tree::ptree& get() const
+		{
+			return *m_pt;
+		}
 
-	protected:
+	private:
 
-		void on_create();
-		void on_destroy();
-
-		objects m_objects;
+		const boost::property_tree::ptree* m_pt;
 
 	};
-
-}
+} 

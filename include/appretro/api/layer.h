@@ -46,7 +46,7 @@
 namespace retro::app::api
 {
 
-	class APPRETRO_API_API layer : public unknown
+	class APPRETRO_API_API layer : public std::enable_shared_from_this<layer>
 	{
 	public:
 
@@ -58,7 +58,9 @@ namespace retro::app::api
 		using layer_id = std::int64_t;
 		using layer_group_ptr = std::weak_ptr<layer_group>;
 
-		layer() noexcept;
+		layer() = delete;
+		explicit layer(map_ptr map) noexcept;
+		explicit layer(layer_group_ptr layer_group) noexcept;
 		~layer() = default;
 		layer(const layer&) = delete;
 		layer& operator=(const layer&) = delete;

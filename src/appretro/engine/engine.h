@@ -55,6 +55,12 @@ namespace retro::app
 
 		bool run(int argc, char** argv);
 
+	private:
+
+		void load_module(const std::filesystem::path& module_path);
+		void load_project(const std::filesystem::path& project_path);
+		void main_loop();
+
 	};
 
 }

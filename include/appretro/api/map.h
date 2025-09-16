@@ -46,32 +46,46 @@
 namespace retro::app::api
 {
 
-	class APPRETRO_API_API map : public unknown, public std::enable_shared_from_this<map>
+	class APPRETRO_API_API map : public std::enable_shared_from_this<map>
 	{
 	public:
 
 		friend class project;
 
-		using project_ptr = std::weak_ptr<project>;
+		using project_wptr = std::weak_ptr<project>;
+		using project_sptr = std::shared_ptr<project>;
 		using layer_ptr = std::shared_ptr<layer>;
 		using layers = std::vector<layer_ptr>;
 
-		map() noexcept = default;
+		map() = delete;
+		explicit map(project_sptr project) noexcept;
 		~map() = default;
 		map(const map&) = delete;
 		map& operator=(const map&) = delete;
 		map(map&&) noexcept = default;
 		map& operator=(map&&) noexcept = default;
 
-		project_ptr project() const noexcept;
+		[[no_discard]] project_wptr project() const noexcept { return m_project; }
+		[[no_discard]] constexpr std::size_t width() const noexcept { return m_width; }
+		[[no_discard]] constexpr std::size_t height() const noexcept { return m_height; }
+		[[no_discard]] constexpr std::size_t tile_width() const noexcept { return m_tile_width; }
+		[[no_discard]] constexpr std::size_t tile_height() const noexcept { return m_tile_height; }
+		[[no_discard]] constexpr std::size_t size() const noexcept { return width() * height(); }
+		[[no_discard]] constexpr std::size_t width_pixels() const noexcept { return width() * tile_width(); }
+		[[no_discard]] constexpr std::size_t height_pixels() const noexcept { return height() * tile_height(); }
+		[[no_discard]] constexpr std::size_t size_pixels() const noexcept { return width_pixels() * height_pixels(); }
 
 	protected:
 
-		void on_create() override;
-		void on_destroy() override;
+		void on_create(const detail::property_tree& pt);
+		void on_destroy();
 
-		project_ptr m_project;
+		project_wptr m_project;
 		layers m_layers;
+		std::size_t m_width;
+		std::size_t m_height;
+		std::size_t m_tile_width;
+		std::size_t m_tile_height;
 
 	};
 

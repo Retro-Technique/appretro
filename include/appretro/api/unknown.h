@@ -46,6 +46,11 @@
 namespace retro::app::api
 {
 
+	namespace detail
+	{
+		class property_tree;
+	}
+
 	class APPRETRO_API_API unknown
 	{
 	public:
@@ -62,11 +67,10 @@ namespace retro::app::api
 		unknown& operator=(unknown&&) noexcept = default;
 	
 	protected:
-
+		 
 		virtual void on_create() = 0;
 		virtual void on_destroy() = 0;
 
-		std::string m_name;
 		properties m_properties;
 
 	};

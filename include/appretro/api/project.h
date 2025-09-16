@@ -45,27 +45,38 @@
 
 namespace retro::app::api
 {
-
-	class APPRETRO_API_API project : public unknown, public std::enable_shared_from_this<project>
+	
+	class APPRETRO_API_API project : public std::enable_shared_from_this<project>
 	{
 	public:
 
-		using map_ptr = std::shared_ptr<map>;
-
 		project() = delete;
-		project(map_ptr map);
+		explicit project(const std::filesystem::path& tiled_project) noexcept;
 		~project() = default;
 		project(const project&) = delete;
 		project& operator=(const project&) = delete;
 		project(project&&) noexcept = default;
 		project& operator=(project&&) noexcept = default;
 
+		void swap_map(const std::filesystem::path& tiled_map);
+
 	protected:
 
-		void on_create() override;
-		void on_destroy() override;
+		void on_create();
 
-		map_ptr m_map;
+		std::shared_ptr<map> m_map;
+
+		struct
+		{		
+			bool created;
+			std::filesystem::path file;
+		} m_tiled_project;
+
+		struct
+		{
+			bool created;
+			std::filesystem::path file;
+		} m_tiled_map;
 
 	};
 

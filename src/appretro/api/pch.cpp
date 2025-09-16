@@ -38,24 +38,3 @@
  */
 
 #include "pch.h"
-
-namespace retro::app::api
-{
-
-	void foo()
-	{
-		std::shared_ptr<map> m = std::make_shared<map>();
-		std::shared_ptr<project> p = std::make_shared<project>(m);
-
-		/*
-		
-		rectangle_object ro1({0, 0}, {32, 32});
-		rectangle_object ro2({32, 32}, {32, 32});
-		object_group og({ro1, ro2});
-		map map({og});
-		project project(map);
-		
-		*/
-	}
-
-}

@@ -57,6 +57,8 @@
 #include "api/layer.h"
 #include "api/layer_group.h"
 #include "api/object_group.h"
+#include "api/tile_layer.h"
+#include "api/image_layer.h"
 #include "api/map.h"
 #include "api/project.h"
 

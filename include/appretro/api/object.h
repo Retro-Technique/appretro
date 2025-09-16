@@ -46,7 +46,7 @@
 namespace retro::app::api
 {
 
-	class APPRETRO_API_API object : public unknown, public std::enable_shared_from_this<object>
+	class APPRETRO_API_API object : public unknown
 	{
 	public:
 

@@ -65,6 +65,11 @@ namespace retro::app
 				return true;
 			}
 
+			load_module(cli.module);
+
+			load_project(cli.project);
+
+			main_loop();
 		}
 		catch (const std::exception& e)
 		{
@@ -73,6 +78,44 @@ namespace retro::app
 		}
 
 		return true;
+	}
+
+	void engine::load_module(const std::filesystem::path& module_path)
+	{
+
+	}
+
+	void engine::load_project(const std::filesystem::path& project_path)
+	{
+
+	}
+
+	void engine::main_loop()
+	{
+		/*
+		::window window(m_project->window_title(), 
+					m_project->window_width(), 
+					m_project->window_height(), 
+					m_project->window_fullscreen(), 
+					m_project->window_resizable(), 
+					glfw_error_callback);
+		::renderer renderer(window);
+
+		BOOST_LOG_TRIVIAL(info) << "GLFW v" << window.glfw_version() << " successfully initialized";
+		BOOST_LOG_TRIVIAL(info) << "OpenGL v3.3 Core Profile rendering mode";
+		BOOST_LOG_TRIVIAL(info) << "Window successfully created";
+
+		while (!window.should_close())
+		{
+			window.poll_events();
+
+			m_project->on_events(window);
+			m_project->on_update();
+			m_project->on_draw(renderer);
+
+			window.swap_buffers();
+		}
+		*/
 	}
 
 }

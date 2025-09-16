@@ -46,26 +46,16 @@
 namespace retro::app::api
 {
 
-	class APPRETRO_API_API object_group : public layer
+	class APPRETRO_API_API image_layer : public layer
 	{
 	public:
 
-		using object_ptr = std::shared_ptr<object>;
-		using objects = std::vector<object_ptr>;
-
-		object_group() noexcept = default;
-		~object_group() = default;
-		object_group(const object_group&) = delete;
-		object_group& operator=(const object_group&) = delete;
-		object_group(object_group&&) noexcept = default;
-		object_group& operator=(object_group&&) noexcept = default;
-
-	protected:
-
-		void on_create();
-		void on_destroy();
-
-		objects m_objects;
+		image_layer() noexcept = default;
+		~image_layer() = default;
+		image_layer(const image_layer&) = delete;
+		image_layer& operator=(const image_layer&) = delete;
+		image_layer(image_layer&&) noexcept = default;
+		image_layer& operator=(image_layer&&) noexcept = default;
 
 	};
 

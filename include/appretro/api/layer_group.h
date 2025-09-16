@@ -50,10 +50,10 @@ namespace retro::app::api
 	{
 	public:
 
-		using layer_ptr = std::shared_ptr<layer>;
-		using layers = std::vector<layer_ptr>;
+		friend class map;
 
-		layer_group() noexcept = default;
+		layer_group() = delete;
+		explicit layer_group(std::weak_ptr<map> map) noexcept;
 		~layer_group() = default;
 		layer_group(const layer_group&) = delete;
 		layer_group& operator=(const layer_group&) = delete;
@@ -62,10 +62,9 @@ namespace retro::app::api
 
 	protected:
 
-		void on_create() override;
-		void on_destroy() override;
+		void on_create(const detail::property_tree& pt);
 
-		layers m_layers;
+		std::vector<std::shared_ptr<layer>> m_layers;
 
 	};
 

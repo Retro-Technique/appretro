@@ -38,23 +38,52 @@
  */
 
 #include "pch.h"
+#include "detail.h"
 
 namespace retro::app::api
 {
 
-	project::project(map_ptr map)
-		: m_map(map)
+	project::project(const std::filesystem::path& tiled_project) noexcept
+		: m_tiled_project{ false, tiled_project }
+		, m_tiled_map{ false, {} }
+		, m_map(nullptr)
 	{
+	}
+
+	void project::swap_map(const std::filesystem::path& tiled_map)
+	{
+		m_tiled_map = { false, tiled_map };
 	}
 
 	void project::on_create()
 	{
-		m_map.get()->on_create();
-	}
+		if (!m_tiled_project.created)
+		{
+			boost::property_tree::ptree pt;
+			boost::property_tree::read_json(m_tiled_project.file.string(), pt);
 
-	void project::on_destroy()
-	{
-		m_map.get()->on_destroy();
+			for (const auto& prop : pt.get_child("properties"))
+			{
+				prop.second.get<std::string>("<xmlattr>.name");
+				prop.second.get<std::string>("<xmlattr>.value");	
+				prop.second.get<std::string>("<xmlattr>.type");
+			}
+
+			m_tiled_project.created = true;
+		}
+
+		if (!m_tiled_map.created)
+		{
+			m_map.reset();
+
+			boost::property_tree::ptree pt;
+			boost::property_tree::read_xml(m_tiled_map.file.string(), pt);
+				
+			m_map = std::make_shared<map>(shared_from_this());
+			m_map->on_create(detail::property_tree(pt.get_child("map")));
+
+			m_tiled_map.created = true;
+		}
 	}
 
 }
