@@ -47,14 +47,14 @@ namespace retro::app::api
 	{
 	}
 
-	object::project_ptr object::project() const noexcept
+	std::weak_ptr<project> object::get_project() const noexcept
 	{
-		return map().lock()->project();
+		return get_map().lock()->get_project();
 	}
 
-	object::map_ptr object::map() const noexcept
+	std::weak_ptr<map> object::get_map() const noexcept
 	{		
-		return m_parent.lock()->map();
+		return m_parent.lock()->get_map();
 	}
 
 }

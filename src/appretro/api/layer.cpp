@@ -42,33 +42,33 @@
 namespace retro::app::api
 {
 
-	layer::layer(map_ptr map) noexcept
+	layer::layer(std::weak_ptr<map> map) noexcept
 		: m_id(INVALID_ID)
 		, m_map(map)
 		, m_parent()
 	{
 	}
 
-	layer::layer(layer_group_ptr layer_group) noexcept
+	layer::layer(std::weak_ptr<layer_group> layer_group) noexcept
 		: m_id(INVALID_ID)
 		, m_map()
 		, m_parent(layer_group)
 	{
 	}
 	
-	layer::project_ptr layer::project() const noexcept
+	std::weak_ptr<project> layer::get_project() const noexcept
 	{
-		return map().lock()->project();
+		return get_map().lock()->get_project();
 	}
 
-	layer::map_ptr layer::map() const noexcept
+	std::weak_ptr<map> layer::get_map() const noexcept
 	{
 		if (!m_map.expired())
 		{
 			return m_map;
 		}
 		
-		return m_parent.lock()->map();
+		return m_parent.lock()->get_map();
 	}
 
 }

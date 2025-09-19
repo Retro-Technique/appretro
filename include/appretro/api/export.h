@@ -58,6 +58,8 @@ namespace retro::app::api
 	class layer;
 	class object_group;
 	class layer_group;
+	class image_layer;
+	class tile_layer;
 	class object;
 
 }

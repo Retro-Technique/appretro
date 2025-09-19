@@ -46,4 +46,3 @@
 #include <boost/log/trivial.hpp>
 #include <boost/log/utility/setup.hpp>
 #include <boost/program_options.hpp>
-#include <boost/json.hpp>

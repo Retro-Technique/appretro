@@ -43,7 +43,7 @@
 namespace retro::app::api
 {
 
-	map::map(project_sptr project) noexcept
+	map::map(std::shared_ptr<project> project) noexcept
 		: m_project(project)
 	{
 	}

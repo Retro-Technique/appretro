@@ -82,12 +82,12 @@ namespace retro::app
 
 	void engine::load_module(const std::filesystem::path& module_path)
 	{
-
+		module_path;
 	}
 
 	void engine::load_project(const std::filesystem::path& project_path)
 	{
-
+		project_path;
 	}
 
 	void engine::main_loop()

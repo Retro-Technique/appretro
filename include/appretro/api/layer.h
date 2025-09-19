@@ -53,30 +53,25 @@ namespace retro::app::api
 		friend class map;
 		friend class layer_group;
 
-		using project_ptr = std::weak_ptr<project>;
-		using map_ptr = std::weak_ptr<map>;
-		using layer_id = std::int64_t;
-		using layer_group_ptr = std::weak_ptr<layer_group>;
-
 		layer() = delete;
-		explicit layer(map_ptr map) noexcept;
-		explicit layer(layer_group_ptr layer_group) noexcept;
+		explicit layer(std::weak_ptr<map> map) noexcept;
+		explicit layer(std::weak_ptr<layer_group> layer_group) noexcept;
 		~layer() = default;
 		layer(const layer&) = delete;
 		layer& operator=(const layer&) = delete;
 		layer(layer&&) noexcept = default;
 		layer& operator=(layer&&) noexcept = default;
 
-		project_ptr project() const noexcept;
-		map_ptr map() const noexcept;
+		std::weak_ptr<project> get_project() const noexcept;
+		std::weak_ptr<map> get_map() const noexcept;
 
 	protected:
 
-		static constexpr layer_id INVALID_ID = 0;
+		static constexpr std::int64_t INVALID_ID = 0;
 
-		layer_id m_id;
-		map_ptr m_map;
-		layer_group_ptr m_parent;
+		std::int64_t m_id;
+		std::weak_ptr<map> m_map;
+		std::weak_ptr<layer_group> m_parent;
 
 	};
 

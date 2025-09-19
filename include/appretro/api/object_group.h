@@ -50,9 +50,6 @@ namespace retro::app::api
 	{
 	public:
 
-		using object_ptr = std::shared_ptr<object>;
-		using objects = std::vector<object_ptr>;
-
 		object_group() noexcept = default;
 		~object_group() = default;
 		object_group(const object_group&) = delete;
@@ -65,7 +62,7 @@ namespace retro::app::api
 		void on_create();
 		void on_destroy();
 
-		objects m_objects;
+		std::vector<std::shared_ptr<object>> m_objects;
 
 	};
 

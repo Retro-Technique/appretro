@@ -52,11 +52,6 @@ namespace retro::app::api
 
 		friend class object_group;
 
-		using project_ptr = std::weak_ptr<project>;
-		using map_ptr = std::weak_ptr<map>;
-		using object_id = std::int64_t;
-		using object_group_ptr = std::weak_ptr<object_group>;
-
 		object() noexcept;
 		~object() = default;
 		object(const object&) = delete;
@@ -64,15 +59,15 @@ namespace retro::app::api
 		object(object&&) noexcept = default;
 		object& operator=(object&&) noexcept = default;
 
-		project_ptr project() const noexcept;
-		map_ptr map() const noexcept;
+		std::weak_ptr<project> get_project() const noexcept;
+		std::weak_ptr<map> get_map() const noexcept;
 
 	protected:
 
-		static constexpr object_id INVALID_ID = 0;
+		static constexpr std::int64_t INVALID_ID = 0;
 
-		object_id m_id;
-		object_group_ptr m_parent;
+		std::int64_t m_id;
+		std::weak_ptr<object_group> m_parent;
 
 	};
 

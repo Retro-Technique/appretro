@@ -52,20 +52,15 @@ namespace retro::app::api
 
 		friend class project;
 
-		using project_wptr = std::weak_ptr<project>;
-		using project_sptr = std::shared_ptr<project>;
-		using layer_ptr = std::shared_ptr<layer>;
-		using layers = std::vector<layer_ptr>;
-
 		map() = delete;
-		explicit map(project_sptr project) noexcept;
+		explicit map(std::shared_ptr<project> project) noexcept;
 		~map() = default;
 		map(const map&) = delete;
 		map& operator=(const map&) = delete;
 		map(map&&) noexcept = default;
 		map& operator=(map&&) noexcept = default;
 
-		[[no_discard]] project_wptr project() const noexcept { return m_project; }
+		[[no_discard]] std::weak_ptr<project> get_project() const noexcept { return m_project; }
 		[[no_discard]] constexpr std::size_t width() const noexcept { return m_width; }
 		[[no_discard]] constexpr std::size_t height() const noexcept { return m_height; }
 		[[no_discard]] constexpr std::size_t tile_width() const noexcept { return m_tile_width; }
@@ -80,8 +75,8 @@ namespace retro::app::api
 		void on_create(const detail::property_tree& pt);
 		void on_destroy();
 
-		project_wptr m_project;
-		layers m_layers;
+		std::weak_ptr<project> m_project;
+		std::vector<std::shared_ptr<layer>> m_layers;
 		std::size_t m_width;
 		std::size_t m_height;
 		std::size_t m_tile_width;
